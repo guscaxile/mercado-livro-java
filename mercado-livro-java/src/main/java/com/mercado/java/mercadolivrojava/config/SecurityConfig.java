@@ -1,5 +1,6 @@
 package com.mercado.java.mercadolivrojava.config;
 
+import com.mercado.java.mercadolivrojava.repository.CustomerRepository;
 import org.apache.catalina.filters.CorsFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
