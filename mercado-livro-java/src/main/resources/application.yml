@@ -1,0 +1,15 @@
+spring:
+  profiles:
+    active: dev
+  jpa:
+    hibernate:
+      ddl-auto: update
+  Jackson:
+    default-property-inclusion: non-null
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+jwt:
+  secret: e53cc877-e4cb-4ea8-a790-83644773ac2f
+  expiration: 999999
