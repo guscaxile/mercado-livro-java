@@ -1,5 +1,7 @@
 package com.mercado.java.mercadolivrojava.validation;
 
+import com.mercado.java.mercadolivrojava.service.CustomerService;
+
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
@@ -12,7 +14,7 @@ public class EmailAvailableValidator implements ConstraintValidator<EmailAvailab
     }
 
     @Override
-    public boolean isValid(String s, ConstraintValidatorContext context) {
+    public boolean isValid(String value, ConstraintValidatorContext context) {
         if (value == null || value.isEmpty()){
             return false;
         }

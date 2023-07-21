@@ -1,6 +1,6 @@
 package com.mercado.java.mercadolivrojava.exception;
 
-public class AuthenticationException extends Exception{
+public class AuthenticationException extends RuntimeException{
 
     private final String errorCode;
 

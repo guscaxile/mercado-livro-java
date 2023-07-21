@@ -1,6 +1,6 @@
 package com.mercado.java.mercadolivrojava.exception;
 
-public class BookNotAvailableException extends Exception {
+public class BookNotAvailableException extends RuntimeException {
 
     private final String errorCode;
 

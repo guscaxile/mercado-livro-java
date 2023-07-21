@@ -36,13 +36,12 @@ public class PurchaseModel {
         this.createdAt = LocalDateTime.now();
     }
 
-    public PurchaseModel(Integer id, CustomerModel customerModel, List<BookModel> books, String nfe, BigDecimal price, LocalDateTime createdAt) {
+    public PurchaseModel(Integer id, CustomerModel customerModel, List<BookModel> books, String nfe, BigDecimal price) {
         this.id = id;
         this.customerModel = customerModel;
         this.books = books;
         this.nfe = nfe;
         this.price = price;
-        this.createdAt = createdAt;
     }
 
     public Integer getId() {

@@ -2,6 +2,7 @@ package com.mercado.java.mercadolivrojava.events.listener;
 
 import com.mercado.java.mercadolivrojava.events.PurchaseEvent;
 import com.mercado.java.mercadolivrojava.model.PurchaseModel;
+import com.mercado.java.mercadolivrojava.service.PurchaseService;
 import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
@@ -21,7 +22,13 @@ public class GenerateNfeListener {
     @EventListener
     public void listen(PurchaseEvent purchaseEvent){
         String nfe = UUID.randomUUID().toString();
-        PurchaseModel purchaseModel = purchaseEvent.getPurchaseModel().copy(nfe = nfe);
+        PurchaseModel purchaseModel = new PurchaseModel(
+                purchaseEvent.getPurchaseModel().getId(),
+                purchaseEvent.getPurchaseModel().getCustomerModel(),
+                purchaseEvent.getPurchaseModel().getBooks(),
+                nfe,
+                purchaseEvent.getPurchaseModel().getPrice()
+        );
         purchaseService.update(purchaseModel);
     }
 }

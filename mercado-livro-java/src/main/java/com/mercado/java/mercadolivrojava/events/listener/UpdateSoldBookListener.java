@@ -1,6 +1,7 @@
 package com.mercado.java.mercadolivrojava.events.listener;
 
 import com.mercado.java.mercadolivrojava.events.PurchaseEvent;
+import com.mercado.java.mercadolivrojava.service.BookService;
 import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
