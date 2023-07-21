@@ -1,6 +1,10 @@
 package com.mercado.java.mercadolivrojava.model;
 
+import com.mercado.java.mercadolivrojava.enums.CustomerStatus;
+import com.mercado.java.mercadolivrojava.enums.Role;
+
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity(name = "customer")
@@ -25,9 +29,9 @@ public class CustomerModel {
 
     @Column(name = "role")
     @Enumerated(EnumType.STRING)
-    @ElementCollection(targetClass = Role::class, fetch = FetchType.EAGER)
+    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "customer_roles", joinColumns = @JoinColumn(name = "customer_id"))
-    private Set<Role> roles = setOf();
+    private Set<Role> roles = new HashSet<>();
 
     public CustomerModel(){
     }

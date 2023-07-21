@@ -1,5 +1,6 @@
 package com.mercado.java.mercadolivrojava.repository;
 
+import com.mercado.java.mercadolivrojava.enums.BookStatus;
 import com.mercado.java.mercadolivrojava.model.BookModel;
 import com.mercado.java.mercadolivrojava.model.CustomerModel;
 import org.springframework.data.domain.Page;

@@ -1,5 +1,7 @@
 package com.mercado.java.mercadolivrojava.model;
 
+import com.mercado.java.mercadolivrojava.enums.BookStatus;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 
