@@ -33,9 +33,6 @@ public class CustomerModel {
     @CollectionTable(name = "customer_roles", joinColumns = @JoinColumn(name = "customer_id"))
     private Set<Role> roles = new HashSet<>();
 
-    public CustomerModel(){
-    }
-
     public CustomerModel(Integer id, String name, String email, CustomerStatus status, String password, Set<Role> roles) {
         this.id = id;
         this.name = name;
@@ -45,7 +42,11 @@ public class CustomerModel {
         this.roles = roles;
     }
 
+    public CustomerModel(Integer id, String name, String email, CustomerStatus status, String password) {
+    }
+
     public CustomerModel(String name, String email, CustomerStatus customerStatus, String password) {
+
     }
 
     public Integer getId() {

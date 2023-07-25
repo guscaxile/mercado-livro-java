@@ -2,6 +2,8 @@ package com.mercado.java.mercadolivrojava.extension;
 
 import com.mercado.java.mercadolivrojava.controller.request.PostBookRequest;
 import com.mercado.java.mercadolivrojava.controller.request.PostCustomerRequest;
+import com.mercado.java.mercadolivrojava.controller.request.PutBookRequest;
+import com.mercado.java.mercadolivrojava.controller.request.PutCustomerRequest;
 import com.mercado.java.mercadolivrojava.enums.BookStatus;
 import com.mercado.java.mercadolivrojava.enums.CustomerStatus;
 import com.mercado.java.mercadolivrojava.model.BookModel;
@@ -41,12 +43,12 @@ public class ConverterExtensionFunction {
 
     public static BookModel toBookModel(PutBookRequest request, BookModel previousValue) {
         return new BookModel(
-                previousValue.getId(),
-                request.getName() != null ? request.getName() : previousValue.getName(),
-                request.getPrice() != null ? request.getPrice() : previousValue.getPrice(),
-                previousValue.getStatus(),
-                previousValue.getCustomer()
-        );
+                        previousValue.getId(),
+                        request.getName() != null ? request.getName() : previousValue.getName(),
+                        request.getPrice() != null ? request.getPrice() : previousValue.getPrice(),
+                previousValue.getCustomer(),
+                previousValue.getStatus()
+                );
     }
 
     public static CustomerResponse toCustomerResponse(CustomerModel model) {
