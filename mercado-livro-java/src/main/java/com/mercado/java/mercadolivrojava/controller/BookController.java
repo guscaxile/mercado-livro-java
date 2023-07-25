@@ -2,6 +2,8 @@ package com.mercado.java.mercadolivrojava.controller;
 
 import com.mercado.java.mercadolivrojava.controller.request.PostBookRequest;
 import com.mercado.java.mercadolivrojava.controller.request.PutBookRequest;
+import com.mercado.java.mercadolivrojava.controller.response.BookResponse;
+import com.mercado.java.mercadolivrojava.controller.response.PageResponse;
 import com.mercado.java.mercadolivrojava.service.BookService;
 import com.mercado.java.mercadolivrojava.service.CustomerService;
 import org.springframework.data.domain.Page;

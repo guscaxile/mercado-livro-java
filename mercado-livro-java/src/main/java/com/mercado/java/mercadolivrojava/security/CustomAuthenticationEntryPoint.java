@@ -1,6 +1,7 @@
 package com.mercado.java.mercadolivrojava.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mercado.java.mercadolivrojava.controller.response.ErrorResponse;
 import com.mercado.java.mercadolivrojava.enums.Errors;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.AuthenticationException;
