@@ -22,8 +22,9 @@ public class BookService {
         this.bookRepository = bookRepository;
     }
 
-    public void create(BookModel book) {
+    public BookModel create(BookModel book) {
         bookRepository.save(book);
+        return book;
     }
 
     public Page<BookModel> findAll(Pageable pageable) {

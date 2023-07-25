@@ -37,6 +37,10 @@ public class BookModel {
     public BookModel(String name, BigDecimal price, BookStatus bookStatus, CustomerModel customer) {
     }
 
+    public BookModel() {
+
+    }
+
     public Integer getId() {
         return id;
     }

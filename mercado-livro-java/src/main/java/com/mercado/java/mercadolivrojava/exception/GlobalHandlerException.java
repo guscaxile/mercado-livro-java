@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 
-import static java.util.stream.Collectors.toList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @ControllerAdvice
 public class GlobalHandlerException {
@@ -42,15 +43,16 @@ public class GlobalHandlerException {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorResponse> handlerMethodArgumentNotValidException(MethodArgumentNotValidException ex, WebRequest request) {
+        List<FieldErrorResponse> fieldErrors = ex.getBindingResult().getFieldErrors().stream()
+                .map(fieldError -> new FieldErrorResponse(fieldError.getDefaultMessage() != null ? fieldError.getDefaultMessage() : "Invalid", fieldError.getField()))
+                .collect(Collectors.toList());
+
         ErrorResponse error = new ErrorResponse(
                 HttpStatus.UNPROCESSABLE_ENTITY.value(),
                 Errors.ML001.getMessage(),
                 Errors.ML001.getCode(),
-                ex.getBindingResult().getFieldErrors().stream()
-                        .map(fieldError -> new FieldErrorResponse(fieldError.getDefaultMessage() != null ? fieldError.getDefaultMessage() : "Invalid", fieldError.getField()))
-                        .toList()
+                fieldErrors
         );
-
         return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(error);
     }
 

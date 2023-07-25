@@ -13,6 +13,8 @@ import com.mercado.java.mercadolivrojava.model.BookModel;
 import com.mercado.java.mercadolivrojava.model.CustomerModel;
 import org.springframework.data.domain.Page;
 
+import java.util.stream.Collectors;
+
 public class ConverterExtensionFunction {
 
     public static CustomerModel toCustomerModel(PostCustomerRequest request){
@@ -42,7 +44,6 @@ public class ConverterExtensionFunction {
                 customer
         );
     }
-
 
     public static BookModel toBookModel(PutBookRequest request, BookModel previousValue) {
         return new BookModel(
@@ -76,6 +77,15 @@ public class ConverterExtensionFunction {
     public static <T> PageResponse<T> toPageResponse(Page<T> page) {
         return new PageResponse<>(
                 page.getContent(),
+                page.getNumber(),
+                page.getTotalElements(),
+                page.getTotalPages()
+        );
+    }
+
+    public static PageResponse<BookResponse> toBookPageResponse(Page<BookModel> page) {
+        return new PageResponse<>(
+                page.getContent().stream().map(ConverterExtensionFunction::toBookResponse).collect(Collectors.toList()),
                 page.getNumber(),
                 page.getTotalElements(),
                 page.getTotalPages()

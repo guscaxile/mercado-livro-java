@@ -2,8 +2,11 @@ package com.mercado.java.mercadolivrojava.config;
 
 import com.mercado.java.mercadolivrojava.enums.Role;
 import com.mercado.java.mercadolivrojava.repository.CustomerRepository;
+import com.mercado.java.mercadolivrojava.security.AuthenticationFilter;
+import com.mercado.java.mercadolivrojava.security.AuthorizationFilter;
 import com.mercado.java.mercadolivrojava.security.CustomAuthenticationEntryPoint;
 import com.mercado.java.mercadolivrojava.security.JwtUtil;
+import com.mercado.java.mercadolivrojava.service.UserDetailsCustomerService;
 import org.apache.catalina.filters.CorsFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,7 +19,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.authentication.AuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
@@ -26,7 +28,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final CustomerRepository customerRepository;
-    private final UserDetailsCustomService userDetails;
+    private final UserDetailsCustomerService userDetails;
     private final JwtUtil jwtUtil;
     private final CustomAuthenticationEntryPoint customEntryPoint;
 
@@ -35,13 +37,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private static final String[] PUBLIC_GET_MATCHERS = new String[]{"/books"};
     private static final String[] ADMIN_MATCHERS = new String[]{"/admin/**"};
 
-
     public SecurityConfig(
             CustomerRepository customerRepository,
-            UserDetailsCustomService userDetails,
+            UserDetailsCustomerService userDetails,
             JwtUtil jwtUtil,
             CustomAuthenticationEntryPoint customEntryPoint
-    ){
+    ) {
         this.customerRepository = customerRepository;
         this.userDetails = userDetails;
         this.jwtUtil = jwtUtil;
@@ -63,7 +64,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(ADMIN_MATCHERS).hasAnyAuthority(Role.ADMIN.getDescription())
                 .anyRequest().authenticated();
         http.addFilter(new AuthenticationFilter(authenticationManager(), customerRepository, jwtUtil));
-        http.addFilter(new AuthenticationFilter(authenticationManager(), userDetails, jwtUtil));
+        http.addFilter(new AuthorizationFilter(authenticationManager(), userDetails, jwtUtil));
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.exceptionHandling().authenticationEntryPoint(customEntryPoint);
     }

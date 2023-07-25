@@ -1,6 +1,9 @@
 package com.mercado.java.mercadolivrojava.controller.request;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
+import com.mercado.java.mercadolivrojava.enums.BookStatus;
+import com.mercado.java.mercadolivrojava.model.BookModel;
+import com.mercado.java.mercadolivrojava.model.CustomerModel;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -24,6 +27,15 @@ public class PostBookRequest {
         this.name = name;
         this.price = price;
         this.customerId = customerId;
+    }
+
+    public BookModel toBookModel(CustomerModel customer) {
+        BookModel bookModel = new BookModel();
+        bookModel.setName(this.name);
+        bookModel.setPrice(this.price);
+        bookModel.setStatus(BookStatus.ATIVO);
+        bookModel.setCustomer(customer);
+        return bookModel;
     }
 
     public String getName() {

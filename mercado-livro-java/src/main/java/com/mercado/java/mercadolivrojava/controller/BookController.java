@@ -4,6 +4,10 @@ import com.mercado.java.mercadolivrojava.controller.request.PostBookRequest;
 import com.mercado.java.mercadolivrojava.controller.request.PutBookRequest;
 import com.mercado.java.mercadolivrojava.controller.response.BookResponse;
 import com.mercado.java.mercadolivrojava.controller.response.PageResponse;
+import com.mercado.java.mercadolivrojava.extension.ConverterExtensionFunction;
+import com.mercado.java.mercadolivrojava.model.BookModel;
+import com.mercado.java.mercadolivrojava.model.Util.BookModelUtil;
+import com.mercado.java.mercadolivrojava.model.CustomerModel;
 import com.mercado.java.mercadolivrojava.service.BookService;
 import com.mercado.java.mercadolivrojava.service.CustomerService;
 import org.springframework.data.domain.Page;
@@ -28,24 +32,27 @@ public class BookController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void create (@RequestBody @Valid PostBookRequest request){
-        var customer = customerService.findById(request.getCustomerId());
-        bookService.create(request.toBookModel(customer));
+    public BookModel create (@RequestBody @Valid PostBookRequest request){
+        CustomerModel customer = customerService.findById(request.getCustomerId());
+        return bookService.create(request.toBookModel(customer));
     }
 
     @GetMapping
     public PageResponse<BookResponse> findAll(@PageableDefault(page = 0, size = 10)Pageable pageable){
-        return bookService.findAll(pageable).map(BookExtensionKt::toResponse).toPageResponse();
+        Page<BookModel> books = bookService.findAll(pageable);
+        return ConverterExtensionFunction.toPageResponse(books.map(ConverterExtensionFunction::toBookResponse));
     }
 
     @GetMapping("/active")
-    public Page<BookResponse> findActives(@PageableDefault(page = 0, size = 10) Pageable pageable){
-        return bookService.findActives(pageable).map(BookExtensionKt::toResponse);
+    public PageResponse<BookResponse> findActives(@PageableDefault(page = 0, size = 10) Pageable pageable){
+        Page<BookModel> activeBooks = bookService.findActives(pageable);
+        return ConverterExtensionFunction.toBookPageResponse(activeBooks);
     }
 
     @GetMapping("/{id}")
     public BookResponse findById(@PathVariable int id){
-        return bookService.findById(id).toResponse();
+        BookModel book = bookService.findById(id);
+        return ConverterExtensionFunction.toBookResponse(book);
     }
 
     @DeleteMapping("/{id}")
@@ -57,7 +64,8 @@ public class BookController {
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void update(@PathVariable int id, @RequestBody PutBookRequest book){
-        var bookSaved = bookService.findById(id);
-        bookService.update(book.toBookModel(bookSaved));
+        BookModel bookSaved = bookService.findById(id);
+        BookModel updatedBook = ConverterExtensionFunction.toBookModel(book, bookSaved);
+        bookService.update(updatedBook);
     }
 }
