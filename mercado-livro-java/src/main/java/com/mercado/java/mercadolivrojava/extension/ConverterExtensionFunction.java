@@ -1,5 +1,7 @@
 package com.mercado.java.mercadolivrojava.extension;
 
+import com.mercado.java.mercadolivrojava.controller.request.PostBookRequest;
+import com.mercado.java.mercadolivrojava.controller.request.PostCustomerRequest;
 import com.mercado.java.mercadolivrojava.enums.BookStatus;
 import com.mercado.java.mercadolivrojava.enums.CustomerStatus;
 import com.mercado.java.mercadolivrojava.model.BookModel;

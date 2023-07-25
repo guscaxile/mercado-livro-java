@@ -26,15 +26,15 @@ public class BookModel {
     @Enumerated(EnumType.STRING)
     private BookStatus status;
 
-    public BookModel(){
-    }
-
     public BookModel(Integer id, String name, BigDecimal price, CustomerModel customer, BookStatus status) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.customer = customer;
         this.status = status;
+    }
+
+    public BookModel(String name, BigDecimal price, BookStatus bookStatus, CustomerModel customer) {
     }
 
     public Integer getId() {

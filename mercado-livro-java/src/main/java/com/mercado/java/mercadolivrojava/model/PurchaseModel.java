@@ -44,6 +44,9 @@ public class PurchaseModel {
         this.price = price;
     }
 
+    public PurchaseModel(CustomerModel customer, List<BookModel> books, double totalSum) {
+    }
+
     public Integer getId() {
         return id;
     }

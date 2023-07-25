@@ -1,6 +1,7 @@
 package com.mercado.java.mercadolivrojava.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mercado.java.mercadolivrojava.controller.request.LoginRequest;
 import com.mercado.java.mercadolivrojava.exception.AuthenticationException;
 import com.mercado.java.mercadolivrojava.repository.CustomerRepository;
 import org.springframework.security.authentication.AuthenticationManager;

@@ -45,6 +45,9 @@ public class CustomerModel {
         this.roles = roles;
     }
 
+    public CustomerModel(String name, String email, CustomerStatus customerStatus, String password) {
+    }
+
     public Integer getId() {
         return id;
     }
