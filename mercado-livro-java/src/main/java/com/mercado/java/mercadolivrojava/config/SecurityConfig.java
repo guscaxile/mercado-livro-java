@@ -2,6 +2,8 @@ package com.mercado.java.mercadolivrojava.config;
 
 import com.mercado.java.mercadolivrojava.enums.Role;
 import com.mercado.java.mercadolivrojava.repository.CustomerRepository;
+import com.mercado.java.mercadolivrojava.security.CustomAuthenticationEntryPoint;
+import com.mercado.java.mercadolivrojava.security.JwtUtil;
 import org.apache.catalina.filters.CorsFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

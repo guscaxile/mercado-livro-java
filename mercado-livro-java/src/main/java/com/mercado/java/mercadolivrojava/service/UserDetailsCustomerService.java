@@ -3,6 +3,7 @@ package com.mercado.java.mercadolivrojava.service;
 import com.mercado.java.mercadolivrojava.exception.AuthenticationException;
 import com.mercado.java.mercadolivrojava.model.CustomerModel;
 import com.mercado.java.mercadolivrojava.repository.CustomerRepository;
+import com.mercado.java.mercadolivrojava.security.UserCustomDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
