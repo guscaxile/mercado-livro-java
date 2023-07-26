@@ -7,7 +7,6 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import java.nio.charset.StandardCharsets;
 import java.util.Date;
 
 @Component
@@ -19,7 +18,7 @@ public class JwtUtil {
     @Value("${jwt.secret}")
     private String secret;
 
-    public String generateToken(int id){
+    public String generateToken(int id) {
         return Jwts.builder()
                 .setSubject(Integer.toString(id))
                 .setExpiration(new Date(System.currentTimeMillis() + expiration))
@@ -27,15 +26,15 @@ public class JwtUtil {
                 .compact();
     }
 
-    public boolean isValidToken(String token){
+    public boolean isValidToken(String token) {
         Claims claims = getClaims(token);
-        if (claims.getSubject() == null || claims.getExpiration() == null || new Date().after(claims.getExpiration())){
+        if (claims.getSubject() == null || claims.getExpiration() == null || new Date().after(claims.getExpiration())) {
             return false;
         }
         return true;
     }
 
-    private Claims getClaims(String token){
+    private Claims getClaims(String token) {
         try {
             return Jwts.parser().setSigningKey(secret.getBytes()).parseClaimsJws(token).getBody();
         } catch (Exception ex) {
@@ -43,7 +42,7 @@ public class JwtUtil {
         }
     }
 
-    public String getSubject(String token){
+    public String getSubject(String token) {
         return getClaims(token).getSubject();
     }
 }

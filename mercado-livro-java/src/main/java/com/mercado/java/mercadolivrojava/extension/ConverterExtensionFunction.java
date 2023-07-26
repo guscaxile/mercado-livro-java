@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 
 public class ConverterExtensionFunction {
 
-    public static CustomerModel toCustomerModel(PostCustomerRequest request){
+    public static CustomerModel toCustomerModel(PostCustomerRequest request) {
         return new CustomerModel(
                 request.getName(),
                 request.getEmail(),
@@ -47,12 +47,12 @@ public class ConverterExtensionFunction {
 
     public static BookModel toBookModel(PutBookRequest request, BookModel previousValue) {
         return new BookModel(
-                        previousValue.getId(),
-                        request.getName() != null ? request.getName() : previousValue.getName(),
-                        request.getPrice() != null ? request.getPrice() : previousValue.getPrice(),
+                previousValue.getId(),
+                request.getName() != null ? request.getName() : previousValue.getName(),
+                request.getPrice() != null ? request.getPrice() : previousValue.getPrice(),
                 previousValue.getCustomer(),
                 previousValue.getStatus()
-                );
+        );
     }
 
     public static CustomerResponse toCustomerResponse(CustomerModel model) {

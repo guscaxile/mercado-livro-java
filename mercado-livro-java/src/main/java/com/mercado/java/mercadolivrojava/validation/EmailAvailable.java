@@ -12,6 +12,8 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 public @interface EmailAvailable {
     String message() default "E-mail já cadastrado.";
+
     Class<?>[] groups() default {};
+
     Class<? extends Payload>[] payload() default {};
 }

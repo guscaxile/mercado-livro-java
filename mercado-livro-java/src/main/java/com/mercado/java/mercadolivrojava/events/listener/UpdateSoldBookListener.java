@@ -17,7 +17,7 @@ public class UpdateSoldBookListener {
 
     @Async
     @EventListener
-    public void listen(PurchaseEvent purchaseEvent){
+    public void listen(PurchaseEvent purchaseEvent) {
         bookService.purchase(purchaseEvent.getPurchaseModel().getBooks());
     }
 }

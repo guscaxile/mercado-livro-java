@@ -23,9 +23,9 @@ public class PurchaseService {
         this.applicationEventPublisher = applicationEventPublisher;
     }
 
-    public void create(PurchaseModel purchaseModel){
-        for (BookModel book : purchaseModel.getBooks()){
-            if (book.getStatus() != BookStatus.ATIVO){
+    public void create(PurchaseModel purchaseModel) {
+        for (BookModel book : purchaseModel.getBooks()) {
+            if (book.getStatus() != BookStatus.ATIVO) {
                 throw new BookNotAvailableException(
                         String.format(Errors.ML103.getMessage(), book.getId(), book.getStatus()), Errors.ML103.getCode()
                 );
@@ -35,11 +35,11 @@ public class PurchaseService {
         applicationEventPublisher.publishEvent(new PurchaseEvent(this, purchaseModel));
     }
 
-    public void update(PurchaseModel purchaseModel){
+    public void update(PurchaseModel purchaseModel) {
         purchaseRepository.save(purchaseModel);
     }
 
-    public Page<PurchaseModel> getCustomerPurchases(Integer id, Pageable pageable){
+    public Page<PurchaseModel> getCustomerPurchases(Integer id, Pageable pageable) {
         return purchaseRepository.findPurchaseByCustomerId(id, pageable);
     }
 }

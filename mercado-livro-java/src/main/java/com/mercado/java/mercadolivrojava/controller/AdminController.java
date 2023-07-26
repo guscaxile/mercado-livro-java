@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AdminController {
 
     @GetMapping("/reports")
-    public String report(){
+    public String report() {
         return "This is a report. Only admin can see it!";
     }
 }

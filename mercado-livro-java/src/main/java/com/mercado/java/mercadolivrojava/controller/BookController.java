@@ -6,7 +6,6 @@ import com.mercado.java.mercadolivrojava.controller.response.BookResponse;
 import com.mercado.java.mercadolivrojava.controller.response.PageResponse;
 import com.mercado.java.mercadolivrojava.extension.ConverterExtensionFunction;
 import com.mercado.java.mercadolivrojava.model.BookModel;
-import com.mercado.java.mercadolivrojava.model.Util.BookModelUtil;
 import com.mercado.java.mercadolivrojava.model.CustomerModel;
 import com.mercado.java.mercadolivrojava.service.BookService;
 import com.mercado.java.mercadolivrojava.service.CustomerService;
@@ -32,38 +31,38 @@ public class BookController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public BookModel create (@RequestBody @Valid PostBookRequest request){
+    public BookModel create(@RequestBody @Valid PostBookRequest request) {
         CustomerModel customer = customerService.findById(request.getCustomerId());
         return bookService.create(request.toBookModel(customer));
     }
 
     @GetMapping
-    public PageResponse<BookResponse> findAll(@PageableDefault(page = 0, size = 10)Pageable pageable){
+    public PageResponse<BookResponse> findAll(@PageableDefault(page = 0, size = 10) Pageable pageable) {
         Page<BookModel> books = bookService.findAll(pageable);
         return ConverterExtensionFunction.toPageResponse(books.map(ConverterExtensionFunction::toBookResponse));
     }
 
     @GetMapping("/active")
-    public PageResponse<BookResponse> findActives(@PageableDefault(page = 0, size = 10) Pageable pageable){
+    public PageResponse<BookResponse> findActives(@PageableDefault(page = 0, size = 10) Pageable pageable) {
         Page<BookModel> activeBooks = bookService.findActives(pageable);
         return ConverterExtensionFunction.toBookPageResponse(activeBooks);
     }
 
     @GetMapping("/{id}")
-    public BookResponse findById(@PathVariable int id){
+    public BookResponse findById(@PathVariable int id) {
         BookModel book = bookService.findById(id);
         return ConverterExtensionFunction.toBookResponse(book);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable int id){
+    public void delete(@PathVariable int id) {
         bookService.delete(id);
     }
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(@PathVariable int id, @RequestBody PutBookRequest book){
+    public void update(@PathVariable int id, @RequestBody PutBookRequest book) {
         BookModel bookSaved = bookService.findById(id);
         BookModel updatedBook = ConverterExtensionFunction.toBookModel(book, bookSaved);
         bookService.update(updatedBook);

@@ -32,7 +32,7 @@ public class PurchaseModel {
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
-    public PurchaseModel(){
+    public PurchaseModel() {
         this.createdAt = LocalDateTime.now();
     }
 

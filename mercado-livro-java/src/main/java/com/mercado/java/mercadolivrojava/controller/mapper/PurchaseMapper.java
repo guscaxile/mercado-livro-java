@@ -17,7 +17,7 @@ public class PurchaseMapper {
         this.customerService = customerService;
     }
 
-    public PurchaseModel toModel(PostPurchaseRequest request){
+    public PurchaseModel toModel(PostPurchaseRequest request) {
         var customer = customerService.findById(request.getCustomerId());
         var books = bookService.findAllById(request.getBookIds());
         var totalSum = books.stream().mapToDouble(book -> book.getPrice().doubleValue()).sum();

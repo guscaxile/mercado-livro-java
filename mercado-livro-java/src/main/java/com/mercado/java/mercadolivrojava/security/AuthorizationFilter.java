@@ -35,15 +35,15 @@ public class AuthorizationFilter extends BasicAuthenticationFilter {
             FilterChain chain
     ) throws IOException, ServletException {
         String authorization = request.getHeader("Authorization");
-        if (authorization != null && authorization.startsWith("Bearer ")){
+        if (authorization != null && authorization.startsWith("Bearer ")) {
             UsernamePasswordAuthenticationToken auth = getAuthentication(authorization.split(" ")[1]);
             SecurityContextHolder.getContext().setAuthentication(auth);
         }
         chain.doFilter(request, response);
     }
 
-    private UsernamePasswordAuthenticationToken getAuthentication(String token){
-        if (!jwtUtil.isValidToken(token)){
+    private UsernamePasswordAuthenticationToken getAuthentication(String token) {
+        if (!jwtUtil.isValidToken(token)) {
             throw new AuthenticationException("Token inválido", "999");
         }
         String subject = jwtUtil.getSubject(token);

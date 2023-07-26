@@ -26,7 +26,7 @@ public class SwaggerConfig {
                 .apiInfo(apiInfo());
     }
 
-    private ApiInfo apiInfo(){
+    private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title("Mercado Livro")
                 .description("Api de gerenciamento de um e-commerce de livros.")

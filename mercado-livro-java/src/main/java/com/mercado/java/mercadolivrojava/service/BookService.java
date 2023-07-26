@@ -43,31 +43,31 @@ public class BookService {
                 ));
     }
 
-    public void delete(int id){
+    public void delete(int id) {
         BookModel book = findById(id);
         book.setStatus(BookStatus.CANCELADO);
         update(book);
     }
 
-    public void update(BookModel book){
+    public void update(BookModel book) {
         bookRepository.save(book);
     }
 
-    public void deleteByCustomer(CustomerModel customer){
+    public void deleteByCustomer(CustomerModel customer) {
         List<BookModel> books = bookRepository.findByCustomer(customer);
-        for (BookModel book : books){
+        for (BookModel book : books) {
             book.setStatus(BookStatus.DELETADO);
         }
         bookRepository.saveAll(books);
     }
 
-    public List<BookModel> findAllById(Set<Integer> bookIds){
+    public List<BookModel> findAllById(Set<Integer> bookIds) {
         return bookRepository.findAllById(bookIds);
     }
 
 
-    public void purchase(List<BookModel> books){
-        for (BookModel book : books){
+    public void purchase(List<BookModel> books) {
+        for (BookModel book : books) {
             book.setStatus(BookStatus.VENDIDO);
         }
         bookRepository.saveAll(books);

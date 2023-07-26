@@ -17,12 +17,12 @@ public class UserCustomDetails implements UserDetails {
         this.customerModel = customerModel;
     }
 
-    public int getId(){
+    public int getId() {
         return customerModel.getId();
     }
 
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities(){
+    public Collection<? extends GrantedAuthority> getAuthorities() {
         return customerModel.getRoles().stream()
                 .map(role -> new SimpleGrantedAuthority(role.getDescription()))
                 .collect(Collectors.toList());

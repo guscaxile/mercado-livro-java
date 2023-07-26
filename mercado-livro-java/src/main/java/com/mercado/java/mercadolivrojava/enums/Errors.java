@@ -1,6 +1,6 @@
 package com.mercado.java.mercadolivrojava.enums;
 
-public enum Errors{
+public enum Errors {
     ML000("ML-000", "Access Denied"),
     ML001("ML-001", "Invalid Request"),
 
@@ -16,7 +16,7 @@ public enum Errors{
     private final String code;
     private final String message;
 
-    Errors(String code, String message){
+    Errors(String code, String message) {
         this.code = code;
         this.message = message;
     }

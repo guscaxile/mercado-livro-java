@@ -24,7 +24,7 @@ public class PurchaseController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void purchase(@RequestBody PostPurchaseRequest request){
+    public void purchase(@RequestBody PostPurchaseRequest request) {
         PurchaseModel purchaseModel = purchaseMapper.toModel(request);
         purchaseService.create(purchaseModel);
     }
@@ -33,7 +33,7 @@ public class PurchaseController {
     public Page<PurchaseModel> getCustomerPurchases(
             @PathVariable int id,
             @PageableDefault(page = 0, size = 10) Pageable pageable
-    ){
+    ) {
         return purchaseService.getCustomerPurchases(id, pageable);
     }
 }

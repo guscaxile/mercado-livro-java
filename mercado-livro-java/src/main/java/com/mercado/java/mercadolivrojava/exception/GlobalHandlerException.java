@@ -25,7 +25,6 @@ public class GlobalHandlerException {
                 ex.getErrorCode(),
                 null
         );
-
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
     }
 
@@ -37,7 +36,6 @@ public class GlobalHandlerException {
                 ex.getErrorCode(),
                 null
         );
-
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
     }
 
@@ -64,7 +62,6 @@ public class GlobalHandlerException {
                 Errors.ML000.getCode(),
                 null
         );
-
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body(error);
     }
 }

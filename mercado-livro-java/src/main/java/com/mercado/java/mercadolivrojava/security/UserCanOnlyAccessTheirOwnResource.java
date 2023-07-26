@@ -10,5 +10,5 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 @PreAuthorize("hasRole('ROLE_ADMIN') || #id == authentication.principal.id")
-public @interface UserCanOnlyAccessTheirOwnResource{
+public @interface UserCanOnlyAccessTheirOwnResource {
 }

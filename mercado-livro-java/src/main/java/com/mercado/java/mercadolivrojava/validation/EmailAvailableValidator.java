@@ -15,7 +15,7 @@ public class EmailAvailableValidator implements ConstraintValidator<EmailAvailab
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
-        if (value == null || value.isEmpty()){
+        if (value == null || value.isEmpty()) {
             return false;
         }
         return customerService.emailAvailable(value);

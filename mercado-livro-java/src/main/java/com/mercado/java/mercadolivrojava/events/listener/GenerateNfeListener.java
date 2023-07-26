@@ -14,13 +14,13 @@ public class GenerateNfeListener {
 
     private final PurchaseService purchaseService;
 
-    public GenerateNfeListener(PurchaseService purchaseService){
+    public GenerateNfeListener(PurchaseService purchaseService) {
         this.purchaseService = purchaseService;
     }
 
     @Async
     @EventListener
-    public void listen(PurchaseEvent purchaseEvent){
+    public void listen(PurchaseEvent purchaseEvent) {
         String nfe = UUID.randomUUID().toString();
         PurchaseModel purchaseModel = new PurchaseModel(
                 purchaseEvent.getPurchaseModel().getId(),

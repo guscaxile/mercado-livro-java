@@ -34,13 +34,13 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     public Authentication attemptAuthentication(
             HttpServletRequest request,
             HttpServletResponse response
-    ){
-        try{
+    ) {
+        try {
             LoginRequest loginRequest = new ObjectMapper().readValue(request.getInputStream(), LoginRequest.class);
             Integer id = customerRepository.findByEmail(loginRequest.getEmail()).getId();
             UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(id, loginRequest.getPassword());
             return authenticationManager.authenticate(authToken);
-        } catch(IOException ex){
+        } catch (IOException ex) {
             throw new AuthenticationException("Falha ao autenticar", "999");
         }
     }

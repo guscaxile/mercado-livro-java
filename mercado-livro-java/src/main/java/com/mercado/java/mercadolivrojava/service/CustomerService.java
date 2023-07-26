@@ -29,21 +29,21 @@ public class CustomerService {
         this.bCrypt = bCrypt;
     }
 
-    public Page<CustomerModel> getAll(String name, Pageable pageable){
-        if (name != null && name.isEmpty()){
+    public Page<CustomerModel> getAll(String name, Pageable pageable) {
+        if (name != null && name.isEmpty()) {
             return customerRepository.findByNameContaining(name, pageable);
         }
         return customerRepository.findAll(pageable);
     }
 
-    public CustomerModel findById(Integer id){
+    public CustomerModel findById(Integer id) {
         return customerRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException(
                         Errors.ML201.getMessage().replace("%s", String.valueOf(id)), Errors.ML201.getCode())
                 );
     }
 
-    public void create(CustomerModel customer){
+    public void create(CustomerModel customer) {
         Set<Role> roles = new HashSet<>();
         roles.add(Role.CUSTOMER);
         CustomerModel customerCopy = new CustomerModel(
@@ -57,21 +57,21 @@ public class CustomerService {
         customerRepository.save(customerCopy);
     }
 
-    public void update(CustomerModel customer){
-        if (!customerRepository.existsById(customer.getId())){
+    public void update(CustomerModel customer) {
+        if (!customerRepository.existsById(customer.getId())) {
             throw new RuntimeException("Customer with ID " + customer.getId() + " not found.");
         }
         customerRepository.save(customer);
     }
 
-    public void delete(Integer id){
+    public void delete(Integer id) {
         CustomerModel customer = findById(id);
         bookService.deleteByCustomer(customer);
         customer.setStatus(CustomerStatus.INATIVO);
         customerRepository.save(customer);
     }
 
-    public boolean emailAvailable(String email){
+    public boolean emailAvailable(String email) {
         return !customerRepository.existsByEmail(email);
     }
 }
