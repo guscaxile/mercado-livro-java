@@ -40,6 +40,6 @@ public class PurchaseService {
     }
 
     public Page<PurchaseModel> getCustomerPurchases(Integer id, Pageable pageable) {
-        return purchaseRepository.findPurchaseByCustomerId(id, pageable);
+        return purchaseRepository.findByCustomerModelId(id, pageable);
     }
 }

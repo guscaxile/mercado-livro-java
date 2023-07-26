@@ -23,7 +23,6 @@ public class GenerateNfeListener {
     public void listen(PurchaseEvent purchaseEvent) {
         String nfe = UUID.randomUUID().toString();
         PurchaseModel purchaseModel = new PurchaseModel(
-                purchaseEvent.getPurchaseModel().getId(),
                 purchaseEvent.getPurchaseModel().getCustomerModel(),
                 purchaseEvent.getPurchaseModel().getBooks(),
                 nfe,
